@@ -1,4 +1,10 @@
 const express = require('express');
+require('dotenv').config();
+
+const HOST = process.env.HOST || "localhost"
+const PORT = process.env.PORT || 8081;
+
+
 
 const app = express();
 
@@ -25,7 +31,11 @@ const jugadores = [ {
 ]
 
 
+<<<<<<< Updated upstream
 app.listen(8081, ()=> console.log('%cConectado paaa......', 'color: red;'));
+=======
+app.listen(PORT, ()=> console.log(`🏃 running at http://${HOST}:${PORT} 🏃`));
+>>>>>>> Stashed changes
 
 app.get('/', (req, res) =>{
 
