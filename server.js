@@ -25,7 +25,7 @@ const jugadores = [ {
 ]
 
 
-app.listen(8081, ()=> console.log('%cConectado......', 'color: red;'));
+app.listen(8081, ()=> console.log('%cConectado paaa......', 'color: red;'));
 
 app.get('/', (req, res) =>{
 
