@@ -31,11 +31,7 @@ const jugadores = [ {
 ]
 
 
-<<<<<<< Updated upstream
-app.listen(8081, ()=> console.log('%cConectado paaa......', 'color: red;'));
-=======
 app.listen(PORT, ()=> console.log(`🏃 running at http://${HOST}:${PORT} 🏃`));
->>>>>>> Stashed changes
 
 app.get('/', (req, res) =>{
 
