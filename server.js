@@ -10,31 +10,7 @@ const app = express();
 
 app.use(express.json());
 
-const jugadores = [ {
-                        nombre : "Lionel",
-                        apellido : "Messi",
-                        pais : "Argentina",
-                        posicion : "Extremo"
-                    },
-                    {
-                        nombre : "Cristiano",
-                        apellido : "Ronaldo",
-                        pais : "Portugal",
-                        posicion : "Centrodelantero"
-                    },
-                    {
-                        nombre : "Neymar",
-                        apellido : "Jr",
-                        pais : "Brasil",
-                        posicion : "Extremo"
-                    },
-                   {
-                        nombre : "Kylian",
-                        apellido : "Mbappe",
-                        pais : "Francia",
-                        posicion : "Extremo"
-                    },
-]
+const jugadores = []
 
 
 app.listen(PORT, ()=> console.log(`🏃 running at http://${HOST}:${PORT} 🏃`));
