@@ -1,16 +1,15 @@
 const express = require('express');
+const {v4 : uuid} = require('uuid');
 require('dotenv').config();
 
 const HOST = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 8081;
 
-
-
 const app = express();
 
 app.use(express.json());
 
-const jugadores = []
+let jugadores = []
 
 
 app.listen(PORT, ()=> console.log(`🏃 running at http://${HOST}:${PORT} 🏃`));
@@ -24,11 +23,14 @@ app.post('/', checkParams, (req, res) =>{
 
     const {nombre, apellido, pais, posicion} = req.body;
 
-    jugadores.push({nombre,apellido,pais,posicion})
+    let id = uuid();
+
+    jugadores.push({id, nombre,apellido,pais,posicion})
 
     res.status(201).send({
         message : "Jugador creado exitosamente",
-        jugador : {
+        created : {
+            id,
             nombre,
             apellido,
             pais,
@@ -41,15 +43,20 @@ app.put('/:id', checkParams, (req, res) =>{
 
     const id = req.params.id;
 
-    if(id > jugadores.length) res.status.send({message : "Jugador inexistente"});
+    let exist = jugadores.find(e => e.id == id);
+
+    if(!exist) res.status(404).send({message : "Jugador inexistente"});
     
     const {nombre, apellido, pais, posicion} = req.body;
 
-    jugadores[id] = {nombre, apellido, pais, posicion};
+    jugadores = [
+        ...jugadores.filter(e => e.id != id),
+        {id, nombre, apellido, pais, posicion}
+    ]
 
     res.status(201).send({
         message : "Jugador actualizado correctamente",
-        jugador : {nombre,apellido,pais,posicion}
+        updated : {nombre,apellido,pais,posicion}
     })
 })
 
@@ -57,13 +64,15 @@ app.delete('/:id', (req, res) =>{
 
     const id = req.params.id;
 
-    if(id > jugadores.length) res.status.send({message : "Jugador inexistente"});
+    let jugador = jugadores.find(e => e.id == id);
 
-    let deleted = jugadores.splice(id, 1)
+    if(!jugador) res.status(404).send({message : "Jugador inexistente"});
+
+    jugadores = jugadores.filter(e => e.id != id);
 
     res.status(200).send({
         message : `Jugador ${id} correctamente eliminado`,
-        jugador : deleted
+        deleted : jugador
     })
 })
 
