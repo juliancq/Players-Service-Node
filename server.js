@@ -28,6 +28,12 @@ const jugadores = [ {
                         pais : "Brasil",
                         posicion : "Extremo"
                     },
+                   {
+                        nombre : "Kylian",
+                        apellido : "Mbappe",
+                        pais : "Francia",
+                        posicion : "Extremo"
+                    },
 ]
 
 
